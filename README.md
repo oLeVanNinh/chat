@@ -1,8 +1,8 @@
 # This repo is implement simple chatapp using socket.io
 
 # Specifiction:
-- User can create a chatroom
-- User can join a chatroom
+- User can create a chat room
+- User can join a chat room
 - Broadcast a message to connected users when someone connects or disconnects.
 - Add support for nicknames.
 - Don’t send the same message to the user that sent it himself. Instead, append the message directly as soon as he presses enter.
