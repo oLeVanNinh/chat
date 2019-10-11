@@ -5,8 +5,10 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const router = require("./controllers/router");
 const logger = require("morgan");
+const cors = require("cors");
 
 mongoose.connect("mongodb://localhost:27017/chat") // connect with local db, replace later
+app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 

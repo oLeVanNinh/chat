@@ -6,6 +6,11 @@ const post = function(req, res, next) {
   const username = req.body.username;
   const password = req.body.password;
 
+  if (!username || !password) {
+    res.status(400);
+    return res.json({ error: "Username or password is required"});
+  }
+
   User.findOne({ username: username }, function(err, user) {
     if (err) { return next(err); }
     if (user) {
