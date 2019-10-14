@@ -7,7 +7,7 @@ const post = function(req, res, next) {
   const password = req.body.password;
 
   if (!username || !password) {
-    res.status(400);
+    res.status(401);
     return res.json({ error: "Username or password is required"});
   }
 
