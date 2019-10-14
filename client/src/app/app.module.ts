@@ -11,13 +11,21 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { ApiInterceptor } from "./interceptors/api_interceptor";
 import { ChatDashBoardComponent } from './chat-dash-board/chat-dash-board.component';
+import { MainChatComponent } from "./chat-dash-board/main-chat/mainchat.component";
+import { SideBarComponent } from "./chat-dash-board/sidebar/sidebar.component";
+import { ChatMembersComponent } from "./chat-dash-board/members/members.component";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserComponent,
-    ChatDashBoardComponent
+    ChatDashBoardComponent,
+    MainChatComponent,
+    SideBarComponent,
+    ChatDashBoardComponent,
+    ChatMembersComponent
   ],
   imports: [
     BrowserModule,

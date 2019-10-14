@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { LoginService } from "./login.service";
 import { User } from "../model/user.model";
 
@@ -11,7 +12,7 @@ import { User } from "../model/user.model";
 export class LoginComponent implements OnInit {
   user: User = new User();
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {}
 
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   getToken() {
     this.formValid && this.loginService.getToken(this.user.username, this.user.password).subscribe((token) => {
       localStorage.setItem("token", token);
+      this.router.navigateByUrl("");
     })
   }
 }
