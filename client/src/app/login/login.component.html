@@ -32,11 +32,11 @@
   <mat-card-content>
     <div class="example-container">
       <mat-form-field>
-        <input matInput placeholder="Username" type="text" [(ngModel)]="user.username" />
+        <input matInput placeholder="Username" type="text" [(ngModel)]="user.username" required minlength="6"/>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Password" type="password" [(ngModel)]="user.password" />
+        <input matInput placeholder="Password" type="password" [(ngModel)]="user.password" required minlength="6"/>
       </mat-form-field>
     </div>
     <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>

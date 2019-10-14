@@ -11,12 +11,14 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { ApiInterceptor } from "./interceptors/api_interceptor";
 import { LoginService } from "./login/login.service";
+import { ChatDashBoardComponent } from './chat-dash-board/chat-dash-board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    UserComponent
+    UserComponent,
+    ChatDashBoardComponent
   ],
   imports: [
     BrowserModule,
