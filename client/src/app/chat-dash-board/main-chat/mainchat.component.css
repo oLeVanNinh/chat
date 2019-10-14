@@ -1,0 +1,39 @@
+textarea {
+  width: 99.5%;
+  margin-bottom: -5px;
+}
+
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  height: calc(100% - 80px)
+}
+
+.messages {
+  flex: 1 1 auto;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 300;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+}
+
+.send-button {
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.chatInput {
+  border: 1px solid #d6d6d6;
+  padding-top: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
