@@ -10,7 +10,6 @@ import { AppRoutingModule } from "./core/app.routing.module";
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { ApiInterceptor } from "./interceptors/api_interceptor";
-import { LoginService } from "./login/login.service";
 import { ChatDashBoardComponent } from './chat-dash-board/chat-dash-board.component';
 
 @NgModule({
@@ -28,7 +27,7 @@ import { ChatDashBoardComponent } from './chat-dash-board/chat-dash-board.compon
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }, LoginService],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
