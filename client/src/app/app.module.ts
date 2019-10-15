@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+import { AppComponent } from './app.component';
 import { CustomMaterialModule } from "./core/material.module";
 import { AppRoutingModule } from "./core/app.routing.module";
 import { LoginComponent } from './login/login.component';
@@ -15,6 +16,7 @@ import { MainChatComponent } from "./chat-dash-board/main-chat/mainchat.componen
 import { SideBarComponent } from "./chat-dash-board/sidebar/sidebar.component";
 import { ChatMembersComponent } from "./chat-dash-board/members/members.component";
 
+const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { ChatMembersComponent } from "./chat-dash-board/members/members.componen
     CustomMaterialModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }],
   bootstrap: [AppComponent]

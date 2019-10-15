@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService } from "../share_service/chat.service";
 
 @Component({
   selector: 'app-chat-dash-board',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatDashBoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private chatService: ChatService) { }
 
   ngOnInit() {
+    console.log('Init');
+    this.chatService.connect();
   }
 
 }
