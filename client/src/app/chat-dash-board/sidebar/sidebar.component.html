@@ -1,2 +1,18 @@
-<h2>Channels</h2>
+<div class="head-channel">
+  <h2>Channels</h2>
+  <fa-icon [icon]="faPlus" (click)="openDialog(addChannel)"></fa-icon>
+</div>
+
+
+<ng-template #addChannel>
+  <h2 mat-dialog-title>Add new Channel</h2>
+  <mat-form-field>
+    <input matInput placeholder="Channel name" type="text" [(ngModel)]="channelName" />
+  </mat-form-field>
+  <mat-dialog-actions>
+    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+    <span style="flex: 1 1 auto;"></span>
+    <button class="mat-raised-button"(click)="closeDialog()">Close</button>
+  </mat-dialog-actions>
+</ng-template>
 <hr>
