@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true},
   password: { type: String, required: true },
   avatar: { type: String, required: false },
+  friends: [Number],
+  channels: [Number],
   createdAt: { type: Date, default: Date.now }
 });
 
