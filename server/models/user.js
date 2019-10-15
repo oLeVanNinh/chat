@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const SALT_FACTOR = 10;
-const secret = "secret" // Todo: replace with ENV
+const secret = process.env.SECRET
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true},
@@ -36,7 +36,7 @@ userSchema.methods.checkPassword = function(guess, done) {
 
 userSchema.methods.token = function() {
   let payload = {
-    user: this.username
+    username: this.username
   }
 
   const token = jwt.sign(payload, secret);
