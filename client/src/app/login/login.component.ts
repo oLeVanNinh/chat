@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   getToken() {
     this.formValid && this.loginService.getToken(this.user.username, this.user.password).subscribe((token) => {
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", JSON.stringify(token));
       this.router.navigateByUrl("");
     })
   }

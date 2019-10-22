@@ -1,6 +1,8 @@
 import { Component, TemplateRef } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { RoomService } from "./chat-room.service";
+import { Room } from "../../model/room.model";
 
 @Component({
   selector: 'sidebar-chat',
@@ -9,11 +11,20 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 })
 
 export class SideBarComponent {
+  chatRooms: Room[];
+  roomName: string = "";
   faPlus = faPlus;
-  channelName: String = ""
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private chatRoomService: RoomService) {
+    this.chatRoomService.getRooms().subscribe(rooms => {
+      this.chatRooms = rooms;
+      console.log(this.chatRooms)
+    })
+  }
 
+  validRoomName(): boolean {
+    return this.roomName.length > 6;
+  }
 
   openDialog(template: TemplateRef<any>): void {
     const dialogConfig = new MatDialogConfig();
@@ -23,11 +34,17 @@ export class SideBarComponent {
   }
 
   closeDialog(): void {
-    this.channelName = "";
+    this.roomName = "";
     this.dialog.closeAll();
   }
 
   save(): void {
-    console.log('SHow');
+    this.chatRoomService.createRoom(this.roomName).subscribe((room) => {
+      this.chatRooms.push(room);
+      this.closeDialog();
+    },
+    (err) => {
+      console.log(err);
+    })
   }
 }

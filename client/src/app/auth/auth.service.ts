@@ -6,7 +6,8 @@ import { Injectable } from "@angular/core";
 
 export class AuthService {
   public getToken(): string {
-    return localStorage.getItem('token');
+    let token = localStorage.getItem('token');
+    return JSON.parse(token).token;
   }
 
   public isLogin(): boolean {

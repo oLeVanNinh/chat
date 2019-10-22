@@ -2,12 +2,21 @@
   <h2>Channels</h2>
   <fa-icon [icon]="faPlus" (click)="openDialog(addChannel)"></fa-icon>
 </div>
+<hr>
 
+<div class="rooms">
+  <div class="room" *ngFor="let room of chatRooms">
+    <img src="assets/images/default.png">
+    <p>
+      {{room.name}}
+    </p>
+  </div>
+</div>
 
 <ng-template #addChannel>
   <h2 mat-dialog-title>Add new Channel</h2>
   <mat-form-field>
-    <input matInput placeholder="Channel name" type="text" [(ngModel)]="channelName" />
+    <input matInput placeholder="Channel name" type="text" [(ngModel)]="roomName" required minlength="6"/>
   </mat-form-field>
   <mat-dialog-actions>
     <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
@@ -15,4 +24,3 @@
     <button class="mat-raised-button"(click)="closeDialog()">Close</button>
   </mat-dialog-actions>
 </ng-template>
-<hr>

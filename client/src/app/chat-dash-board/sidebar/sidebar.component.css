@@ -1,6 +1,7 @@
 .head-channel {
   display: flex;
   flex-direction: row;
+  padding-left: 10px;
 }
 
 .head-channel h2 {
@@ -19,4 +20,30 @@ mat-form-field {
 
 hr {
   margin-top: 0;
+}
+
+.room {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+.room:hover {
+  background-color: honeydew;
+}
+
+.room img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.room p {
+  max-width: 300px;
+  margin-left: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 100;
 }
