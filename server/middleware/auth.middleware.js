@@ -24,6 +24,7 @@ function authToken(req, res, next) {
 
       User.findOne({username: username}, function(err, user) {
         if (user) {
+          res.locals.user = user;
           next();
         }
         else {
