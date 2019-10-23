@@ -3,6 +3,10 @@ textarea {
   margin-bottom: -5px;
 }
 
+hr {
+  margin-bottom: 0;
+}
+
 .messages-container {
   display: flex;
   flex-direction: column;
@@ -12,6 +16,36 @@ textarea {
 
 .messages {
   flex: 1 1 auto;
+  overflow: auto;
+  padding-left: 5px;
+  list-style-type: none;
+}
+
+.message {
+  padding: 10px;
+  display: flex;
+}
+
+.message img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0084b2;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-box p {
+  margin: .3em auto;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .btn {

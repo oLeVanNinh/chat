@@ -2,14 +2,20 @@
 <hr>
 
 <div class="messages-container">
-  <div class="messages">
-
-  </div>
+  <ul class="messages">
+    <li *ngFor="let message of messages" class="message">
+      <img src="assets/images/default.png">
+      <div class="text-box">
+        <div class="user-name">Bot</div>
+        <p>{{message.message}}</p>
+      </div>
+    </li>
+  </ul>
 
   <div class="chatInput">
     <div class="sendbar">
-      <button class="btn send-button">Send</button>
+      <button class="btn send-button" (click)="sendMessage()">Send</button>
     </div>
-    <textarea name="message" id="message"  rows="5"></textarea>
+    <textarea name="message" id="message" rows="5" [(ngModel)]="currentMessage"></textarea>
   </div>
 </div>

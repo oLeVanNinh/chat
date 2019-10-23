@@ -28,7 +28,7 @@
 </mat-toolbar>
 
 <div class="container">
-  <sidebar-chat></sidebar-chat>
-  <main-chat></main-chat>
+  <sidebar-chat (selectRoom)="setRoom($event)"></sidebar-chat>
+  <main-chat [currentRoomId]="currentRoomId"></main-chat>
   <chat-members></chat-members>
 </div>

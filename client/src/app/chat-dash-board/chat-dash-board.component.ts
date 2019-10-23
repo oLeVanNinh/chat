@@ -7,6 +7,7 @@ import { ChatService } from "../share_service/chat.service";
   styleUrls: ['./chat-dash-board.component.css']
 })
 export class ChatDashBoardComponent implements OnInit {
+  currentRoomId: string;
 
   constructor(private chatService: ChatService) { }
 
@@ -15,4 +16,7 @@ export class ChatDashBoardComponent implements OnInit {
     this.chatService.connect();
   }
 
+  setRoom(event) {
+    this.currentRoomId = event;
+  }
 }
