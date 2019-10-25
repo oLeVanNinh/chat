@@ -21,7 +21,17 @@ app.use(helpers.unless('/gen_token', authToken));
 app.use(router);
 
 io.on('connection', (socket) => {
-  console.log('io connecteed');
+  socket.on('join', (roomId) => {
+    socket.join(roomId);
+  })
+
+  socket.on('leave', (roomId) => {
+    socket.leave(roomId);
+  })
+
+  socket.on('message', (data) => {
+    io.sockets.in(data.roomId).emit('chat message', data.message);
+  })
 })
 
 http.listen(3000, () => {

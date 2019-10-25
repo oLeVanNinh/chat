@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService } from "../share_service/chat.service";
 
 @Component({
   selector: 'app-chat-dash-board',
@@ -9,10 +8,9 @@ import { ChatService } from "../share_service/chat.service";
 export class ChatDashBoardComponent implements OnInit {
   currentRoomId: string;
 
-  constructor(private chatService: ChatService) { }
+  constructor() { }
 
   ngOnInit() {
-    console.log('Init');
   }
 
   setRoom(event) {
