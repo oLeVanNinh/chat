@@ -13,7 +13,6 @@ export class ChatDashBoardComponent implements OnInit {
 
   ngOnInit() {
     console.log('Init');
-    this.chatService.connect();
   }
 
   setRoom(event) {
