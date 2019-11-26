@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import * as io from "socket.io-client"
+import * as io from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +15,9 @@ export class ChatService {
   }
 
   connect() {
-    this.socket.on('connect', function() {
+    this.socket.on('connect', () => {
       console.log('Connect');
-    })
+    });
   }
 
   join(roomId) {
@@ -29,15 +29,15 @@ export class ChatService {
   }
 
   message(roomId, message) {
-    this.socket.emit(('message'), { roomId: roomId, message: message });
+    this.socket.emit(('message'), { roomId, message });
   }
 
   receiveMessage(): Observable<any> {
 
     return new Observable(sub => {
-      this.socket.on('chat message', function(message) {
+      this.socket.on('chat message', (message) => {
         sub.next(message);
-      })
-    })
+      });
+    });
   }
 }

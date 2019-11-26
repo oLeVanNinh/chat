@@ -20,7 +20,7 @@ function getRoomMessage(req, res, next) {
         if (err) { next(err) };
 
         if (msgs) {
-          return res.json({messages: msgs});
+          return res.json(msgs);
         }
       });
     }
@@ -50,7 +50,7 @@ function createMessage(req, res, next) {
       room.messageIds.push(newMessage._id);
       room.save();
 
-      return res.json({message: newMessage});
+      return res.json(newMessage);
     }
   })
 }

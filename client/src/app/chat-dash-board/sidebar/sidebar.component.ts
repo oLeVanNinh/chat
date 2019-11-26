@@ -1,8 +1,8 @@
-import { Component, TemplateRef, EventEmitter, Output } from "@angular/core";
-import { MatDialog, MatDialogConfig } from "@angular/material";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { RoomService } from "./chat-room.service";
-import { Room } from "../../model/room.model";
+import { Component, TemplateRef, EventEmitter, Output } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { RoomService } from './chat-room.service';
+import { Room } from '../../model/room.model';
 
 @Component({
   selector: 'sidebar-chat',
@@ -13,7 +13,7 @@ import { Room } from "../../model/room.model";
 export class SideBarComponent {
   chatRooms: Room[];
   currentRoomId: string;
-  roomName: string = "";
+  roomName = '';
   faPlus = faPlus;
 
   @Output() selectRoom = new EventEmitter();
@@ -21,7 +21,7 @@ export class SideBarComponent {
   constructor(private dialog: MatDialog, private chatRoomService: RoomService) {
     this.chatRoomService.getRooms().subscribe(rooms => {
       this.chatRooms = rooms;
-    })
+    });
   }
 
   validRoomName(): boolean {
@@ -36,7 +36,7 @@ export class SideBarComponent {
   }
 
   closeDialog(): void {
-    this.roomName = "";
+    this.roomName = '';
     this.dialog.closeAll();
   }
 
@@ -46,8 +46,7 @@ export class SideBarComponent {
       this.closeDialog();
     },
     (err) => {
-      console.log(err);
-    })
+    });
   }
 
   setCurrentRoom(roomId: string): void {

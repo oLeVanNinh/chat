@@ -1,8 +1,7 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Message } from "../model/message.model";
-import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Message } from '../model/message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +10,10 @@ import { map } from 'rxjs/operators';
 export class MessageService {
   constructor(private http: HttpClient) {}
 
-  getMessages(roomId: string): Observable<Message[]>{
-    let params = new HttpParams().set('roomId', roomId);
+  getMessages(roomId: string): Observable<Message[]> {
+    const params = new HttpParams().set('roomId', roomId);
 
-    return this.http.get<Message[]>('/rooms/messages', { params }).pipe(map(res => res['messages']));
+    return this.http.get<Message[]>('/rooms/messages', { params });
   }
 
   createMessage(roomId: string, message: string): Observable<Message> {
@@ -22,11 +21,11 @@ export class MessageService {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded'
       })
-    }
+    };
 
     const params = new HttpParams({fromObject: {
-      roomId: roomId,
-      message: message
+      roomId,
+      message
     }});
 
     return this.http.post<Message>('/rooms/message/create', params, httpOptions);
