@@ -21,7 +21,13 @@ export class MainChatComponent implements OnInit, OnChanges {
   constructor(private chatService: MessageService, private socketService: ChatService) { }
 
   ngOnInit() {
-    this.socketService.receiveMessage().subscribe(m => {
+    this.socketService.receiveMessage().subscribe(message => {
+      this.messages.push(message);
+
+      // Because view is not update instantly, so we need make it async
+      window.setTimeout(() => {
+        this.scrollToBottom();
+      }, 0);
     });
   }
 
