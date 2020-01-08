@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { LoginService } from "./login.service";
-import { User } from "../model/user.model";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from './login.service';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +21,11 @@ export class LoginComponent implements OnInit {
   }
 
   getToken() {
-    this.formValid && this.loginService.getToken(this.user.username, this.user.password).subscribe((token) => {
-      localStorage.setItem("token", JSON.stringify(token));
-      this.router.navigateByUrl("");
-    })
+    if (this.formValid) {
+      this.loginService.getToken(this.user.username, this.user.password).subscribe((token) => {
+        localStorage.setItem('token', JSON.stringify(token));
+        this.router.navigateByUrl('');
+      });
+    }
   }
 }

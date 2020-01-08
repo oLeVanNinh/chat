@@ -49,6 +49,11 @@ export class MainChatComponent implements OnInit, OnChanges {
         this.socketService.message(this.currentRoomId, this.currentMessage);
         this.messages.push(message);
         this.currentMessage = '';
+
+        // Because view is not update instantly, so we need make it async
+        window.setTimeout(() => {
+          this.scrollToBottom();
+        }, 0);
       });
     }
   }
