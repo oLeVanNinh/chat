@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +6,7 @@ import { Injectable } from "@angular/core";
 
 export class AuthService {
   public getToken(): string {
-    let token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     return token && JSON.parse(token).token || null;
   }
 

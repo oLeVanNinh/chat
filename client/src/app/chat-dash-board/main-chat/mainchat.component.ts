@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChange, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, SimpleChange, OnInit, OnChanges, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from '../../share_service/chat.service';
 import { MessageService } from '../../share_service/message.service';
 import { Message } from '../../model/message.model';
@@ -16,6 +16,7 @@ export class MainChatComponent implements OnInit, OnChanges {
   currentMessage: string;
 
   @Input('currentRoomId') currentRoomId: string;
+  @ViewChild('messagesElement', { read: ElementRef, static: true }) messagesElement: ElementRef;
 
   constructor(private chatService: MessageService, private socketService: ChatService) { }
 
@@ -33,6 +34,11 @@ export class MainChatComponent implements OnInit, OnChanges {
       this.socketService.leave(change.previousValue);
       this.chatService.getMessages(this.currentRoomId).pipe(take(1)).subscribe(messages => {
         this.messages = messages;
+
+        // Because view is not update instantly, so we need make it async
+        window.setTimeout(() => {
+          this.scrollToBottom();
+        }, 0);
       });
     }
   }
@@ -45,5 +51,10 @@ export class MainChatComponent implements OnInit, OnChanges {
         this.currentMessage = '';
       });
     }
+  }
+
+  scrollToBottom(): void {
+    const messageHTMLElement = this.messagesElement.nativeElement;
+    messageHTMLElement.scrollTop = messageHTMLElement.scrollHeight;
   }
 }
