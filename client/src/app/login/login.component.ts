@@ -11,6 +11,7 @@ import { SessionService } from '@services/session.service';
 
 export class LoginComponent implements OnInit {
   ngForm: NgForm;
+  isLoggin = true;
 
   constructor(private sessionService: SessionService, private router: Router) { }
 
@@ -29,5 +30,9 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('');
       });
     }
+  }
+
+  toggleLoginState(): void {
+    this.isLoggin = !this.isLoggin;
   }
 }
