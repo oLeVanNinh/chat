@@ -27,11 +27,12 @@ chat-members {
 
 .mat-menu-panel {
   min-height: 56px;
+
+  .mat-menu-content:not(:empty) {
+    padding-bottom: 0;
+  }
 }
 
-.mat-menu-content:not(:empty) {
-  padding-bottom: 0;
-}
 
 .mat-menu-item {
   padding-right: 20px;

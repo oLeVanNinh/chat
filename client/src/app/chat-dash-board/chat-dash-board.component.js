@@ -19,7 +19,7 @@ var ChatDashBoardComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-chat-dash-board',
             templateUrl: './chat-dash-board.component.html',
-            styleUrls: ['./chat-dash-board.component.css']
+            styleUrls: ['./chat-dash-board.component.scss']
         })
     ], ChatDashBoardComponent);
     return ChatDashBoardComponent;

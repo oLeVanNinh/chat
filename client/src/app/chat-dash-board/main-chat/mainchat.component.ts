@@ -7,7 +7,7 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'main-chat',
   templateUrl: './mainchat.component.html',
-  styleUrls: ['./mainchat.component.css']
+  styleUrls: ['./mainchat.component.scss']
 })
 
 export class MainChatComponent implements OnInit, OnChanges {
@@ -23,11 +23,7 @@ export class MainChatComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.socketService.receiveMessage().subscribe(message => {
       this.messages.push(message);
-
-      // Because view is not update instantly, so we need make it async
-      window.setTimeout(() => {
-        this.scrollToBottom();
-      }, 0);
+      this.scrollToBottom();
     });
   }
 
@@ -40,11 +36,7 @@ export class MainChatComponent implements OnInit, OnChanges {
       this.socketService.leave(change.previousValue);
       this.chatService.getMessages(this.currentRoomId).pipe(take(1)).subscribe(messages => {
         this.messages = messages;
-
-        // Because view is not update instantly, so we need make it async
-        window.setTimeout(() => {
-          this.scrollToBottom();
-        }, 0);
+        this.scrollToBottom();
       });
     }
   }
@@ -55,17 +47,16 @@ export class MainChatComponent implements OnInit, OnChanges {
         this.socketService.message(this.currentRoomId, this.currentMessage);
         this.messages.push(message);
         this.currentMessage = '';
-
-        // Because view is not update instantly, so we need make it async
-        window.setTimeout(() => {
-          this.scrollToBottom();
-        }, 0);
+        this.scrollToBottom();
       });
     }
   }
 
   scrollToBottom(): void {
-    const messageHTMLElement = this.messagesElement.nativeElement;
-    messageHTMLElement.scrollTop = messageHTMLElement.scrollHeight;
+    // Because view is not update instantly, so we need make it async
+    window.setTimeout(() => {
+      const messageHTMLElement = this.messagesElement.nativeElement;
+      messageHTMLElement.scrollTop = messageHTMLElement.scrollHeight;
+    }, 0);
   }
 }

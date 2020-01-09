@@ -7,7 +7,7 @@ import { Room } from '../../model/room.model';
 @Component({
   selector: 'sidebar-chat',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.scss']
 })
 
 export class SideBarComponent {

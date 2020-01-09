@@ -6,7 +6,7 @@ import { User } from '../model/user.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 
 export class LoginComponent implements OnInit {
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   formValid(): boolean {
-    return this.user.username && this.user.username.length >= 6 && this.user && this.user.password.length >= 6
+    return this.user.username && this.user.username.length >= 6 && this.user && this.user.password.length >= 6;
   }
 
   getToken() {
