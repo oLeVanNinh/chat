@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../model/user.model';
 import { SessionService } from '@services/session.service';
@@ -9,19 +10,21 @@ import { SessionService } from '@services/session.service';
 })
 
 export class LoginComponent implements OnInit {
-  user: User = new User();
+  ngForm: NgForm;
 
   constructor(private sessionService: SessionService, private router: Router) { }
 
   ngOnInit() {}
 
-  formValid(): boolean {
-    return this.user.username && this.user.username.length >= 6 && this.user && this.user.password.length >= 6;
+  formValid(loginForm: any): boolean {
+    return loginForm.username && loginForm.username.length >= 6 && loginForm.password && loginForm.password.length >= 6;
   }
 
-  getToken(): void {
-    if (this.formValid) {
-      this.sessionService.getToken(this.user.username, this.user.password).subscribe((token) => {
+  getToken(form: NgForm): void {
+    const loginForm = form.value;
+    const formValid = this.formValid(loginForm);
+    if (formValid) {
+      this.sessionService.getToken(loginForm.username, loginForm.password).subscribe((token) => {
         localStorage.setItem('token', JSON.stringify(token));
         this.router.navigateByUrl('');
       });
