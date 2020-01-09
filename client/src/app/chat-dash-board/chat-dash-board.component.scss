@@ -26,7 +26,7 @@ chat-members {
 }
 
 .mat-menu-panel {
-  min-height: 56px;
+  min-height: 56px !important;
 
   .mat-menu-content:not(:empty) {
     padding-bottom: 0;

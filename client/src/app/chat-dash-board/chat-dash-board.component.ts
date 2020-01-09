@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { SessionService } from '@services/session.service';
 
 @Component({
   selector: 'app-chat-dash-board',
@@ -9,12 +10,16 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 export class ChatDashBoardComponent implements OnInit {
   currentRoomId: string;
 
-  constructor() { }
+  constructor(private sessionService: SessionService) { }
 
   ngOnInit() {
   }
 
   setRoom(event) {
     this.currentRoomId = event;
+  }
+
+  onLogOutClick() {
+    this.sessionService.logout();
   }
 }
