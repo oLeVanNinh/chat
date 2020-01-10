@@ -10,6 +10,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const helpers = require("./helpers/helper");
 const authToken = require("./middleware/auth.middleware");
+const excludedRoute = ['/gen_token', '/registration']
 
 mongoose.connect("mongodb://localhost:27017/chat") // connect with local db, replace later
 
@@ -17,7 +18,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
-app.use(helpers.unless('/gen_token', authToken));
+app.use(helpers.unless(excludedRoute, authToken));
 app.use(router);
 
 io.on('connection', (socket) => {

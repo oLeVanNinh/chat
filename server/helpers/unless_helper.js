@@ -1,6 +1,7 @@
-function unless(path, middleware) {
+function unless(paths, middleware) {
   return function(req, res, next) {
-    if (path == req.originalUrl) {
+    const tokenIsNotNeedAuthenicate = paths.indexOf(req.originalUrl) > -1;
+    if (tokenIsNotNeedAuthenicate) {
       next()
     }
     else {
