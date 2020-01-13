@@ -13,14 +13,19 @@ const createToken = function(req, res, next) {
 
   User.findOne({ username: username }, function(err, user) {
     if (err) { return next(err); }
-    if (user) {
-      return res.json({token: user.token() });
-    }
-    else {
-      return res.status(401).send({
-        message: 'Username or password is not correct'
-      });
-    }
+    user.checkPassword(password, (err, isMatch) => {
+      if (err) {
+        return next(err)
+      }
+      else if (isMatch){
+        return res.json({token: user.token() });
+      }
+      else {
+        return res.status(401).send({
+          message: 'Username or password is not correct'
+        });
+      }
+    });
   });
 }
 
