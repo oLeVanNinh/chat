@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '../model/user.model';
 import { SessionService } from '@services/session.service';
 @Component({
   selector: 'app-login',
@@ -12,6 +11,7 @@ import { SessionService } from '@services/session.service';
 export class LoginComponent implements OnInit {
   ngForm: NgForm;
   isLoggin = true;
+  errorMessage = '';
 
   constructor(private sessionService: SessionService, private router: Router) { }
 
@@ -27,7 +27,11 @@ export class LoginComponent implements OnInit {
     if (formValid) {
       this.sessionService.getToken(loginForm.username, loginForm.password).subscribe((token) => {
         localStorage.setItem('token', JSON.stringify(token));
+        this.errorMessage = '';
         this.router.navigateByUrl('');
+      },
+      (err) => {
+        this.errorMessage = err.error.message;
       });
     }
   }

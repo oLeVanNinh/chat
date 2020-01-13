@@ -23,6 +23,7 @@
       </div>
       <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
     </mat-card-content>
+    <div class="error-message" *ngIf="!!errorMessage">{{errorMessage}}</div>
     <mat-card-footer class="mat-card-footer">
       <button mat-raised-button color="primary">Login</button>
     </mat-card-footer>

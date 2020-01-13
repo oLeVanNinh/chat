@@ -28,3 +28,17 @@
 input {
   height: 30px;
 }
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin: 5px 0 10px 0
+}
+
+.mat-card-content {
+  margin-bottom: 0;
+
+  + .mat-card-footer {
+    margin-top: 16px;
+  }
+}
