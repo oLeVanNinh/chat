@@ -19,7 +19,7 @@ const createToken = function(req, res, next) {
           return next(err)
         }
         else if (isMatch){
-          return res.json({token: user.token() });
+          return res.json({token: user.token(), user: user });
         }
         else {
           return res.status(401).send({
@@ -63,7 +63,7 @@ const registration = function(req, res, next) {
     });
 
     newUser.save().then(user => {
-      return res.json({token: user.token() });
+      return res.json({token: user.token(), user: user });
     }).catch(err => {
       return next(err);
     })
