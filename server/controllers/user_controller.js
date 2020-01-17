@@ -39,10 +39,15 @@ const createToken = function(req, res, next) {
 const registration = function(req, res, next) {
   const username = req.body.username;
   const password = req.body.password;
+  const password_confirmation = req.body.password_confirmation;
   const display_name = req.body.display_name;
 
   if (!username || !password || !display_name) {
     return res.status(401).send({ error: "Username or password is required"});
+  }
+
+  if (password !== password_confirmation) {
+    return res.status(401).send({ error: "Password doesn't match"});
   }
 
   User.findOne({ username: username }, function(err, user) {

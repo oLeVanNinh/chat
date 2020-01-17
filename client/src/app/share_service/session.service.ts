@@ -9,19 +9,17 @@ import { Observable } from 'rxjs';
 export class SessionService {
   constructor(private http: HttpClient) {}
 
-  getToken(username, password): Observable<string>{
+  getToken(action, userAttributes): Observable<string> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded'
       })
     };
 
-    const params = new HttpParams({fromObject: {
-      username,
-      password
-    }});
+    const url = action === 'login' ? '/login' : '/registration';
+    const params = new HttpParams({fromObject: userAttributes});
 
-    return this.http.post<string>('/gen_token', params, httpOptions);
+    return this.http.post<string>(url, params, httpOptions);
   }
 
   logout(): void {

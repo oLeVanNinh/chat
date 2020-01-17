@@ -10,7 +10,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const helpers = require("./helpers/helper");
 const authToken = require("./middleware/auth.middleware");
-const excludedRoute = ['/gen_token', '/registration']
+const excludedRoute = ['/login', '/registration']
 
 mongoose.connect("mongodb://localhost:27017/chat") // connect with local db, replace later
 

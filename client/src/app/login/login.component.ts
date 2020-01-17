@@ -18,14 +18,20 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   formValid(loginForm: any): boolean {
-    return loginForm.username && loginForm.username.length >= 6 && loginForm.password && loginForm.password.length >= 6;
+    let commonCheck = loginForm.username && loginForm.username.length >= 6 && loginForm.password && loginForm.password.length >= 6;
+    if (!this.isLoggin) {
+      const passwordMatch = loginForm.password_confirmation.length >= 6 && loginForm.password_confirmation === loginForm.password;
+      commonCheck = commonCheck && passwordMatch;
+    }
+    return commonCheck;
   }
 
   getToken(form: NgForm): void {
     const loginForm = form.value;
     const formValid = this.formValid(loginForm);
+    const action = this.isLoggin ? 'login' : 'singup';
     if (formValid) {
-      this.sessionService.getToken(loginForm.username, loginForm.password).subscribe((token) => {
+      this.sessionService.getToken(action, loginForm).subscribe((token) => {
         localStorage.setItem('token', JSON.stringify(token));
         this.errorMessage = '';
         this.router.navigateByUrl('');
@@ -38,5 +44,6 @@ export class LoginComponent implements OnInit {
 
   toggleLoginState(): void {
     this.isLoggin = !this.isLoggin;
+    this.errorMessage = '';
   }
 }

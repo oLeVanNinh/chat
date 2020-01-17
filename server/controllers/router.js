@@ -6,7 +6,7 @@ const MessageController = require("./messages_controller");
 
 router.get("/rooms", RoomsController.getRoomsHandle);
 router.post("/room/create", RoomsController.createRoomsHandle);
-router.post("/gen_token", UserController.createToken);
+router.post("/login", UserController.createToken);
 router.post("/registration", UserController.registration);
 router.get("/rooms/messages", MessageController.getRoomMessage);
 router.post("/rooms/message/create", MessageController.createMessage);

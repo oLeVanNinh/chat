@@ -8,24 +8,58 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<form #form="ngForm" (ngSubmit)="getToken(form)" autocomplete="off">
-  <mat-card class="example-card form-container">
-    <mat-card-title>Login</mat-card-title>
-    <mat-card-content>
-      <div class="example-container">
-        <mat-form-field>
-          <input matInput placeholder="Username" type="text" name="username" ngModel #username="ngModel" required minlength="6"/>
-        </mat-form-field>
+<ng-container *ngIf="isLoggin; then loginForm else signUpForm"></ng-container>
 
-        <mat-form-field>
-          <input matInput placeholder="Password" type="password" name="password" ngModel #password="ngModel" required minlength="6"/>
-        </mat-form-field>
-      </div>
-      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-    </mat-card-content>
-    <div class="error-message" *ngIf="!!errorMessage">{{errorMessage}}</div>
-    <mat-card-footer class="mat-card-footer">
-      <button mat-raised-button color="primary">Login</button>
-    </mat-card-footer>
-  </mat-card>
-</form>
+<ng-template #loginForm>
+  <form #form="ngForm" (ngSubmit)="getToken(form)" autocomplete="off">
+    <mat-card class="example-card form-container">
+      <mat-card-title>{{!isLoggin ? 'Sign Up' : 'Log in'}}</mat-card-title>
+      <mat-card-content>
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="Username" type="text" name="username" ngModel #username="ngModel" required minlength="6"/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Password" type="password" name="password" ngModel #password="ngModel" required minlength="6"/>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <div class="error-message" *ngIf="!!errorMessage">{{errorMessage}}</div>
+      <mat-card-footer class="mat-card-footer">
+        <button mat-raised-button color="primary">{{!isLoggin ? 'Sign Up' : 'Log in'}}</button>
+      </mat-card-footer>
+    </mat-card>
+  </form>
+</ng-template>
+
+<ng-template #signUpForm>
+  <form #form="ngForm" (ngSubmit)="getToken(form)" autocomplete="off">
+    <mat-card class="example-card form-container">
+      <mat-card-title>{{!isLoggin ? 'Sign Up' : 'Log in'}}</mat-card-title>
+      <mat-card-content>
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="Username" type="text" name="username" ngModel #username="ngModel" required minlength="6"/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Password" type="password" name="password" ngModel #password="ngModel" required minlength="6"/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Password Confirmation" type="password" name="password_confirmation" ngModel #password_confirmation="ngModel" required minlength="6"/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Display Name" type="text" name="display_name" ngModel #display_name="ngModel" required minlength="3"/>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <div class="error-message" *ngIf="!!errorMessage">{{errorMessage}}</div>
+      <mat-card-footer class="mat-card-footer">
+        <button mat-raised-button color="primary">{{!isLoggin ? 'Sign Up' : 'Log in'}}</button>
+      </mat-card-footer>
+    </mat-card>
+  </form>
+</ng-template>
