@@ -23,6 +23,6 @@
 
 <div class="container">
   <sidebar-chat (selectRoom)="setRoom($event)"></sidebar-chat>
-  <main-chat [currentRoomId]="currentRoomId"></main-chat>
+  <main-chat [currentRoomId]="currentRoomId" [currentUser]="user"></main-chat>
   <chat-members></chat-members>
 </div>

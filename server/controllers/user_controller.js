@@ -19,7 +19,7 @@ const createToken = function(req, res, next) {
           return next(err)
         }
         else if (isMatch){
-          return res.json({token: user.token(), user: user });
+          return res.json({ token: user.token() });
         }
         else {
           return res.status(401).send({
@@ -63,14 +63,30 @@ const registration = function(req, res, next) {
     });
 
     newUser.save().then(user => {
-      return res.json({token: user.token(), user: user });
+      return res.json({ token: user.token() });
     }).catch(err => {
       return next(err);
     })
   });
 }
 
+const getUserInfo = function(req, res, next) {
+  if (res.locals.user) {
+    const user = res.locals.user;
+    const user_json = {
+      id: user._id,
+      username: user.username,
+      display_name: user.display_name,
+      avatar: user.image,
+      friends: user.friends,
+      channels: user.channels
+    }
+    return res.json(user_json);
+  }
+}
+
 UserController.createToken = createToken;
 UserController.registration = registration;
+UserController.getUserInfo = getUserInfo;
 
 module.exports = UserController;

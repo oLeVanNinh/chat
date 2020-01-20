@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class SessionService {
     const params = new HttpParams({fromObject: userAttributes});
 
     return this.http.post<string>(url, params, httpOptions);
+  }
+
+  getUserInfo(): Observable<User> {
+    return this.http.get<User>('/user_info');
   }
 
   logout(): void {

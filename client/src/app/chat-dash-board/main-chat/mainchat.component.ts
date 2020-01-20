@@ -3,6 +3,7 @@ import { ChatService } from '../../share_service/chat.service';
 import { MessageService } from '../../share_service/message.service';
 import { Message } from '../../model/message.model';
 import { take } from 'rxjs/operators';
+import { User } from 'app/model/user.model';
 
 @Component({
   selector: 'main-chat',
@@ -16,6 +17,7 @@ export class MainChatComponent implements OnInit, OnChanges {
   currentMessage: string;
 
   @Input('currentRoomId') currentRoomId: string;
+  @Input('currentUser') currentUser: User;
   @ViewChild('messagesElement', { read: ElementRef, static: true }) messagesElement: ElementRef;
 
   constructor(private chatService: MessageService, private socketService: ChatService) { }
@@ -28,12 +30,12 @@ export class MainChatComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: {[property: string]: SimpleChange}): void {
-    const change = changes.currentRoomId;
+    const roomChange = changes.currentRoomId;
 
-    if (!change.firstChange && change.currentValue !== change.previousValue) {
+    if (roomChange && !roomChange.firstChange && roomChange.currentValue !== roomChange.previousValue) {
       this.currentMessage = '';
       this.socketService.join(this.currentRoomId);
-      this.socketService.leave(change.previousValue);
+      this.socketService.leave(roomChange.previousValue);
       this.chatService.getMessages(this.currentRoomId).pipe(take(1)).subscribe(messages => {
         this.messages = messages;
         this.scrollToBottom();

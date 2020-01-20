@@ -1,4 +1,8 @@
-export class User {
+export interface User {
+  id: string;
+  username: string;
   displayName: string;
-  image: string;
+  avatar: string;
+  friends: [];
+  channels: [];
 }
