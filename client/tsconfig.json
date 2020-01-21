@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@services/*": ["app/share_service/*"]
+      "@services/*": ["app/share_service/*"],
+      "@models/*": ["app/models/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -25,5 +26,8 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
+  },
+  "rules": {
+    "no-string-literal": true
   }
 }

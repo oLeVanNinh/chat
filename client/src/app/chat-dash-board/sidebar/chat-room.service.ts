@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Room } from "../../model/room.model";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Room } from '../../models/room.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +20,9 @@ export class RoomService {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded'
       })
-    }
+    };
 
-    const params = new HttpParams({fromObject: {
-      roomName: roomName
-    }})
+    const params = new HttpParams({fromObject: { roomName }});
 
     return this.http.post<Room>('/room/create', params, httpOptions).pipe(map(res => res['room']));
   }

@@ -1,9 +1,9 @@
 import { Component, Input, SimpleChange, OnInit, OnChanges, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from '../../share_service/chat.service';
 import { MessageService } from '../../share_service/message.service';
-import { Message } from '../../model/message.model';
+import { Message } from '../../models/message.model';
 import { take } from 'rxjs/operators';
-import { User } from 'app/model/user.model';
+import { User } from '@models/user.model';
 
 @Component({
   selector: 'main-chat',
@@ -23,8 +23,8 @@ export class MainChatComponent implements OnInit, OnChanges {
   constructor(private chatService: MessageService, private socketService: ChatService) { }
 
   ngOnInit() {
-    this.socketService.receiveMessage().subscribe(message => {
-      this.messages.push(message);
+    this.socketService.receiveMessage().subscribe(data => {
+      this.messages.push(data.message);
       this.scrollToBottom();
     });
   }
@@ -36,8 +36,8 @@ export class MainChatComponent implements OnInit, OnChanges {
       this.currentMessage = '';
       this.socketService.join(this.currentRoomId);
       this.socketService.leave(roomChange.previousValue);
-      this.chatService.getMessages(this.currentRoomId).pipe(take(1)).subscribe(messages => {
-        this.messages = messages;
+      this.chatService.getMessages(this.currentRoomId).pipe(take(1)).subscribe(data => {
+        this.messages = data.messages;
         this.scrollToBottom();
       });
     }
@@ -46,7 +46,7 @@ export class MainChatComponent implements OnInit, OnChanges {
   sendMessage(): void {
     if (!!this.currentMessage && !!this.currentRoomId) {
       this.chatService.createMessage(this.currentRoomId, this.currentMessage).subscribe((message) => {
-        this.socketService.message(this.currentRoomId, this.currentMessage);
+        this.socketService.message(this.currentRoomId, message);
         this.messages.push(message);
         this.currentMessage = '';
         this.scrollToBottom();

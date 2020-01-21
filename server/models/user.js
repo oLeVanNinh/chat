@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   image: { type: String, required: false, default: '' },
   friends: [Number],
-  channels: [Number],
+  rooms: [mongoose.Schema.Types.ObjectId],
   createdAt: { type: Date, default: Date.now }
 });
 

@@ -1,4 +1,5 @@
 const Room = require("../models/room");
+const User = require("../models/user");
 const RoomController = {};
 
 function getRoomsHandle(req, res, next) {
@@ -18,11 +19,12 @@ function getRoomsHandle(req, res, next) {
   })
 }
 
-function createRoomsHandle(req, res, next) {
+async function createRoomsHandle(req, res, next) {
   const roomName = req.body.roomName;
-
-  console.log(roomName);
-
+  const users = await User.find({});
+  const user_ids = users.map((user) => {
+    return user._id;
+  })
   if (!roomName) {
     res.status(401);
     return res.json({error: 'Name is require for room'});
@@ -37,10 +39,14 @@ function createRoomsHandle(req, res, next) {
   });
 
   const newRoom = new Room({
-    name: roomName
+    name: roomName,
+    userIds: [user_ids]
   })
-
   newRoom.save();
+    users.forEach((user) => {
+      user.rooms.push(newRoom._id);
+      user.save();
+    })
   return res.json({ room: newRoom });
 }
 

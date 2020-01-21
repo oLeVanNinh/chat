@@ -79,7 +79,7 @@ const getUserInfo = function(req, res, next) {
       display_name: user.display_name,
       avatar: user.image,
       friends: user.friends,
-      channels: user.channels
+      rooms: user.rooms
     }
     return res.json(user_json);
   }

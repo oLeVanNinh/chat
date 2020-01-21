@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Message } from '../model/message.model';
+import { Message } from '@models/message.model';
+import { RoomMessage } from '@models/room_message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,10 @@ import { Message } from '../model/message.model';
 export class MessageService {
   constructor(private http: HttpClient) {}
 
-  getMessages(roomId: string): Observable<Message[]> {
+  getMessages(roomId: string): Observable<RoomMessage> {
     const params = new HttpParams().set('roomId', roomId);
 
-    return this.http.get<Message[]>('/rooms/messages', { params });
+    return this.http.get<RoomMessage>('/rooms/messages', { params });
   }
 
   createMessage(roomId: string, message: string): Observable<Message> {

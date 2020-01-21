@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SessionService } from '@services/session.service';
-import { User } from '../model/user.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-chat-dash-board',

@@ -1,5 +1,6 @@
 const Message = require('../models/messages');
 const Room = require("../models/room");
+const User = require("../models/user");
 const MessageController = {};
 
 function getRoomMessage(req, res, next) {
@@ -10,17 +11,18 @@ function getRoomMessage(req, res, next) {
     return res.json({error: 'Room is not exist'});
   }
 
-  Room.findById(roomId, function(err, room) {
+  Room.findById(roomId, async function(err, room) {
     if (err) { next(err) };
 
     if (room) {
       let msgIds = room.messageIds;
+      const users =  await User.find({'_id': { $in: room.userIds }})
 
       Message.find({'_id': { $in: msgIds }}, function(err, msgs) {
         if (err) { next(err) };
 
         if (msgs) {
-          return res.json(msgs);
+          return res.json({ messages: msgs, users: users });
         }
       });
     }

@@ -1,8 +1,8 @@
 export interface User {
   id: string;
   username: string;
-  displayName: string;
+  display_name: string;
   avatar: string;
   friends: [];
-  channels: [];
+  rooms: [];
 }

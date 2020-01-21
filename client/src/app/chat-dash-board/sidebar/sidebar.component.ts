@@ -2,7 +2,7 @@ import { Component, TemplateRef, EventEmitter, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { RoomService } from './chat-room.service';
-import { Room } from '../../model/room.model';
+import { Room } from '../../models/room.model';
 
 @Component({
   selector: 'sidebar-chat',

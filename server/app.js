@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
   })
 
   socket.on('message', (data) => {
-    io.sockets.in(data.roomId).emit('chat message', data);
+    socket.broadcast.to(data.roomId).emit('chat message', data);
   })
 })
 
