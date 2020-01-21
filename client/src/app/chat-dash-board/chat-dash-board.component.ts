@@ -11,6 +11,7 @@ import { User } from '../models/user.model';
 export class ChatDashBoardComponent implements OnInit {
   currentRoomId: string;
   user: User;
+  users: User[];
 
   constructor(private sessionService: SessionService) { }
 
@@ -20,8 +21,12 @@ export class ChatDashBoardComponent implements OnInit {
     });
   }
 
-  setRoom(event) {
-    this.currentRoomId = event;
+  setRoom(roomId) {
+    this.currentRoomId = roomId;
+  }
+
+  setUserForRoom(users) {
+    this.users = users;
   }
 
   onLogOutClick() {

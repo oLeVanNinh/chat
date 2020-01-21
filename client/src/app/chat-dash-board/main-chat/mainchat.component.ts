@@ -1,9 +1,9 @@
-import { Component, Input, SimpleChange, OnInit, OnChanges, ViewChild, ElementRef } from '@angular/core';
-import { ChatService } from '../../share_service/chat.service';
-import { MessageService } from '../../share_service/message.service';
-import { Message } from '../../models/message.model';
-import { take } from 'rxjs/operators';
+import { Component, Input, SimpleChange, OnInit, OnChanges, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { ChatService } from '@services/chat.service';
+import { MessageService } from '@services/message.service';
+import { Message } from '@models/message.model';
 import { User } from '@models/user.model';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'main-chat',
@@ -17,6 +17,7 @@ export class MainChatComponent implements OnInit, OnChanges {
   currentMessage: string;
   userInRoomsHash: object = {};
 
+  @Output() getUsersInRoom = new EventEmitter();
   @Input('currentRoomId') currentRoomId: string;
   @Input('currentUser') currentUser: User;
   @ViewChild('messagesElement', { read: ElementRef, static: true }) messagesElement: ElementRef;
@@ -38,8 +39,10 @@ export class MainChatComponent implements OnInit, OnChanges {
       this.socketService.join(this.currentRoomId);
       this.socketService.leave(roomChange.previousValue);
       this.chatService.getMessages(this.currentRoomId).pipe(take(1)).subscribe(data => {
+        const users = data.users;
         this.messages = data.messages;
-        this.buildUsersInRoomHash(data.users);
+        this.getUsersInRoom.emit(users);
+        this.buildUsersInRoomHash(users);
         this.scrollToBottom();
       });
     }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { User } from '@models/user.model';
 
 @Component({
   selector: 'chat-members',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./members.component.scss']
 })
 export class ChatMembersComponent implements OnInit {
+
+  @Input('userList') users: User[];
 
   constructor() { }
 

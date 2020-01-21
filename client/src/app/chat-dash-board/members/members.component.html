@@ -1,2 +1,10 @@
 <h2>Members</h2>
 <hr>
+<div class="user-list">
+  <div class="user" *ngFor="let user of users">
+    <img src="assets/images/default.png">
+    <p>
+      {{user.display_name}}
+    </p>
+  </div>
+</div>
