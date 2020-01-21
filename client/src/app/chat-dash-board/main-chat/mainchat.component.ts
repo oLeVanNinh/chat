@@ -15,6 +15,7 @@ export class MainChatComponent implements OnInit, OnChanges {
   roomMessages: object = {};
   messages: Message[];
   currentMessage: string;
+  userInRoomsHash: object = {};
 
   @Input('currentRoomId') currentRoomId: string;
   @Input('currentUser') currentUser: User;
@@ -38,6 +39,7 @@ export class MainChatComponent implements OnInit, OnChanges {
       this.socketService.leave(roomChange.previousValue);
       this.chatService.getMessages(this.currentRoomId).pipe(take(1)).subscribe(data => {
         this.messages = data.messages;
+        this.buildUsersInRoomHash(data.users);
         this.scrollToBottom();
       });
     }
@@ -60,5 +62,12 @@ export class MainChatComponent implements OnInit, OnChanges {
       const messageHTMLElement = this.messagesElement.nativeElement;
       messageHTMLElement.scrollTop = messageHTMLElement.scrollHeight;
     }, 0);
+  }
+
+  buildUsersInRoomHash(objs) {
+    objs.forEach(user => {
+      const _id = user._id;
+      this.userInRoomsHash[_id] = user;
+    });
   }
 }

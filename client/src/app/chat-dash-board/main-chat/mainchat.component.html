@@ -6,7 +6,7 @@
     <li *ngFor="let message of messages" class="message">
       <img src="assets/images/default.png">
       <div class="text-box">
-        <div class="user-name">{{currentUser.display_name}}</div>
+        <div class="user-name">{{userInRoomsHash[message.sender].display_name}}</div>
         <p>{{message.message}}</p>
       </div>
     </li>

@@ -40,7 +40,7 @@ async function createRoomsHandle(req, res, next) {
 
   const newRoom = new Room({
     name: roomName,
-    userIds: [user_ids]
+    userIds: user_ids
   })
   newRoom.save();
     users.forEach((user) => {

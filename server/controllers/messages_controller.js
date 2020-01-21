@@ -16,7 +16,7 @@ function getRoomMessage(req, res, next) {
 
     if (room) {
       let msgIds = room.messageIds;
-      const users =  await User.find({'_id': { $in: room.userIds }})
+      const users = await User.find({}) // await User.find({'_id': { $in: room.userIds }}) , just for mocking
 
       Message.find({'_id': { $in: msgIds }}, function(err, msgs) {
         if (err) { next(err) };
