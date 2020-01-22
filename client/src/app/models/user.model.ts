@@ -1,8 +1,9 @@
 export interface User {
-  id: string;
+  _id: string;
   username: string;
   display_name: string;
   avatar: string;
   friends: [];
   rooms: [];
+  status: boolean;
 }

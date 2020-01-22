@@ -2,6 +2,7 @@
 <hr>
 <div class="user-list">
   <div class="user" *ngFor="let user of users">
+    <div class="status" [class.active]="user.status"></div>
     <img src="assets/images/default.png">
     <p>
       {{user.display_name}}

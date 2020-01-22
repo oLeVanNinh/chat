@@ -36,7 +36,7 @@ export class MainChatComponent implements OnInit, OnChanges {
 
     if (roomChange && !roomChange.firstChange && roomChange.currentValue !== roomChange.previousValue) {
       this.currentMessage = '';
-      this.socketService.join(this.currentRoomId);
+      this.socketService.join(this.currentRoomId, this.currentUser._id);
       this.socketService.leave(roomChange.previousValue);
       this.chatService.getMessages(this.currentRoomId).pipe(take(1)).subscribe(data => {
         const users = data.users;

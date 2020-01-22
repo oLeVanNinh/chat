@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true},
   password: { type: String, required: true },
   image: { type: String, required: false, default: '' },
+  status: { type: Boolean },
   friends: [Number],
   rooms: [mongoose.Schema.Types.ObjectId],
   createdAt: { type: Date, default: Date.now }

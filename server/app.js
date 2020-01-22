@@ -11,6 +11,7 @@ const cors = require("cors");
 const helpers = require("./helpers/helper");
 const authToken = require("./middleware/auth.middleware");
 const excludedRoute = ['/login', '/registration']
+const Socket = require('./socket');
 
 mongoose.connect("mongodb://localhost:27017/chat") // connect with local db, replace later
 
@@ -21,19 +22,7 @@ app.use(logger('dev'));
 app.use(helpers.unless(excludedRoute, authToken));
 app.use(router);
 
-io.on('connection', (socket) => {
-  socket.on('join', (roomId) => {
-    socket.join(roomId);
-  })
-
-  socket.on('leave', (roomId) => {
-    socket.leave(roomId);
-  })
-
-  socket.on('message', (data) => {
-    socket.broadcast.to(data.roomId).emit('chat message', data);
-  })
-})
+Socket.connection(io);
 
 http.listen(3000, () => {
   console.log('server is running at port 3000');

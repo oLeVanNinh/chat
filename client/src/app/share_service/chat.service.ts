@@ -14,14 +14,12 @@ export class ChatService {
     this.socket = io(this.socketUrl);
   }
 
-  connect() {
-    this.socket.on('connect', () => {
-      console.log('Connect');
-    });
+  connect(user) {
+    this.socket.emit('connected', user);
   }
 
-  join(roomId) {
-    this.socket.emit('join', roomId);
+  join(roomId, userId) {
+    this.socket.emit('join', { roomId, userId });
   }
 
   leave(roomId) {
@@ -37,6 +35,22 @@ export class ChatService {
     return new Observable(sub => {
       this.socket.on('chat message', (message) => {
         sub.next(message);
+      });
+    });
+  }
+
+  useJoinRoom(): Observable<any> {
+    return new Observable(sub => {
+      this.socket.on('join room', userId => {
+        sub.next(userId);
+      });
+    });
+  }
+
+  userOffline(): Observable<any> {
+    return new Observable(sub => {
+      this.socket.on('offline', userId => {
+        sub.next(userId);
       });
     });
   }

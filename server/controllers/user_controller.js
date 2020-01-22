@@ -74,7 +74,7 @@ const getUserInfo = function(req, res, next) {
   if (res.locals.user) {
     const user = res.locals.user;
     const user_json = {
-      id: user._id,
+      _id: user._id,
       username: user.username,
       display_name: user.display_name,
       avatar: user.image,

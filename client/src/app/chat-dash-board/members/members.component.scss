@@ -10,7 +10,7 @@ hr {
   .user {
     display: flex;
     align-items: center;
-    padding-left: 15px;
+    padding-left: 7px;
     height: 35px;
 
     img {
@@ -25,4 +25,15 @@ hr {
       font-size: 14px;
     }
   }
+}
+
+.status {
+  margin-right: 5px;
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+}
+
+.active {
+  background-color: #2BC988;
 }
