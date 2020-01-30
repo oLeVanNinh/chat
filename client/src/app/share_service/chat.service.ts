@@ -41,7 +41,7 @@ export class ChatService {
 
   useJoinRoom(): Observable<any> {
     return new Observable(sub => {
-      this.socket.on('join room', userId => {
+      this.socket.on('online', userId => {
         sub.next(userId);
       });
     });
